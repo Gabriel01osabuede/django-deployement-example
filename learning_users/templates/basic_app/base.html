@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <ul class="nav navbar-nav">
+            {% if user.is_authenticated %}
+
+            <li> <a class="navbar-brand" href="{% url 'index' %}">DJANGO</a></li>
+            <li> <a class="navbar-link" href="{% url 'admin:index' %}">Admin</a></li>
+            <li> <a class="navbar-link" href="{% url 'special' %}">Special</a></li>
+            {% else %}
+            <li> <a class="navbar-link" href="{% url 'basic_app:register' %}">Register</a></li>
+            {% endif %}
+
+
+            {% if user.is_authenticated %}
+            <li> <a class="navbar-link" href="{% url 'logout' %}">LOGOUT</a></li>
+            {% else %}
+            <li> <a class="navbar-link" href="{% url 'basic_app:user_login' %}">LOGIN</a></li>
+            {% endif %}
+
+        </ul>
+    </div>
+</nav>
+
+
+<div class="container">
+    {% block body_block %}
+    <!--Anything else goes inside the bodyblock and the ones outside get's inheritted-->
+    {% endblock %}
+</div>
+
+</body>
+</html>
